@@ -6,6 +6,7 @@ import UpdateCategoryUseCase from '../usecases/UpdateCategoryUseCase.js';
 import DeleteCategoryUseCase from '../usecases/DeleteCategoryUseCase.js';
 import GetParentCategoriesUseCase from '../usecases/GetParentCategoriesUseCase.js';
 import GetSubcategoriesUseCase from '../usecases/GetSubcategoriesUseCase.js';
+import GetCategoryAnalyticsUseCase from '../usecases/GetCategoryAnalyticsUseCase.js';
 
 export class CategoryService {
   constructor(categoryRepository) {
@@ -19,6 +20,7 @@ export class CategoryService {
     this.deleteCategoryUseCase = new DeleteCategoryUseCase(categoryRepository);
     this.getParentCategoriesUseCase = new GetParentCategoriesUseCase(categoryRepository);
     this.getSubcategoriesUseCase = new GetSubcategoriesUseCase(categoryRepository);
+    this.getCategoryAnalyticsUseCase = new GetCategoryAnalyticsUseCase(categoryRepository);
   }
 
   async getAllCategories(options = {}) {
@@ -47,6 +49,10 @@ export class CategoryService {
 
   async getSubcategories(parentId) {
     return await this.getSubcategoriesUseCase.execute(parentId);
+  }
+
+  async getCategoryAnalytics() {
+    return await this.getCategoryAnalyticsUseCase.execute();
   }
 
   // Additional business methods

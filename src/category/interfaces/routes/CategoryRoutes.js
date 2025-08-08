@@ -3,6 +3,9 @@ import CategoryController from '../controllers/CategoryController.js';
 
 const router = express.Router();
 
+// GET /api/categories/analytics - Get category analytics
+router.get('/analytics', CategoryController.getCategoryAnalytics);
+
 // GET /api/categories/hierarchy - Get categories with hierarchy (must be before /:id route)
 router.get('/hierarchy', CategoryController.getCategoriesHierarchy);
 

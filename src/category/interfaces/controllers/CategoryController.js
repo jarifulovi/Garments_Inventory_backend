@@ -247,6 +247,32 @@ export class CategoryController {
     }
   }
 
+  // GET /api/categories/analytics - Get category analytics
+  static async getCategoryAnalytics(req, res) {
+    try {
+      const result = await categoryService.getCategoryAnalytics();
+      
+      if (result.success) {
+        res.json({
+          success: true,
+          data: result.data,
+          message: result.message
+        });
+      } else {
+        res.status(400).json({
+          success: false,
+          message: result.error
+        });
+      }
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: 'Internal server error',
+        error: error.message
+      });
+    }
+  }
+
   // PUT /api/categories/:id/deactivate - Soft delete category
   static async softDeleteCategory(req, res) {
     try {

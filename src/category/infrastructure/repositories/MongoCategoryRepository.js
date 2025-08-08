@@ -86,6 +86,12 @@ export class MongoCategoryRepository extends CategoryRepository {
       .sort({ name: 1 });
   }
 
+  async findAllIncludingInactive() {
+    return await Category.find({})
+      .populate('parentCategory', 'name')
+      .sort({ name: 1 });
+  }
+
   async countProductsInCategory(categoryId) {
     // This would require access to Product model, but keeping interface clean
     // Implementation can be added when Product model is available
