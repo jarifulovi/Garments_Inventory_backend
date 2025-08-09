@@ -21,7 +21,8 @@ export class CategoryController {
       if (result.success) {
         res.json({
           success: true,
-          data: result.data
+          data: result.data,
+          message: result.message || 'Categories retrieved successfully'
         });
       } else {
         res.status(400).json({
@@ -46,7 +47,8 @@ export class CategoryController {
       if (result.success) {
         res.json({
           success: true,
-          data: result.data
+          data: result.data,
+          message: result.message || 'Category retrieved successfully'
         });
       } else {
         const statusCode = result.error === 'Category not found' ? 404 : 400;
@@ -72,8 +74,7 @@ export class CategoryController {
       if (result.success) {
         res.status(201).json({
           success: true,
-          message: result.message,
-          data: result.data
+          message: result.message
         });
       } else {
         res.status(400).json({
@@ -98,8 +99,7 @@ export class CategoryController {
       if (result.success) {
         res.json({
           success: true,
-          message: result.message,
-          data: result.data
+          message: result.message
         });
       } else {
         const statusCode = result.error === 'Category not found' ? 404 : 400;
@@ -281,8 +281,7 @@ export class CategoryController {
       if (result.success) {
         res.json({
           success: true,
-          message: result.message,
-          data: result.data
+          message: result.message
         });
       } else {
         const statusCode = result.error === 'Category not found' ? 404 : 400;
@@ -308,8 +307,7 @@ export class CategoryController {
       if (result.success) {
         res.json({
           success: true,
-          message: result.message,
-          data: result.data
+          message: result.message
         });
       } else {
         const statusCode = result.error === 'Category not found' ? 404 : 400;

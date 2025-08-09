@@ -5,16 +5,13 @@ import CategoryRepository from '../../domain/repositories/CategoryRepository.js'
 export class MongoCategoryRepository extends CategoryRepository {
   async findAll() {
     return await Category.find({ isActive: true })
-      .populate('parentCategory', 'name')
-      .populate('subcategories', 'name')
+      .populate('parentCategory', '_id name')
       .sort({ name: 1 });
   }
 
   async findById(id) {
     return await Category.findById(id)
-      .populate('parentCategory', 'name')
-      .populate('subcategories', 'name isActive')
-      .populate('productsCount');
+      .populate('parentCategory', '_id name');
   }
 
   async create(categoryData) {
@@ -27,8 +24,7 @@ export class MongoCategoryRepository extends CategoryRepository {
       id,
       categoryData,
       { new: true, runValidators: true }
-    ).populate('parentCategory', 'name')
-     .populate('subcategories', 'name');
+    ).populate('parentCategory', '_id name');
   }
 
   async delete(id) {
@@ -55,7 +51,7 @@ export class MongoCategoryRepository extends CategoryRepository {
       parentCategory: parentId, 
       isActive: true 
     })
-      .populate('parentCategory', 'name')
+      .populate('parentCategory', '_id name')
       .sort({ name: 1 });
   }
 
@@ -76,19 +72,19 @@ export class MongoCategoryRepository extends CategoryRepository {
 
   async findActiveCategories() {
     return await Category.find({ isActive: true })
-      .populate('parentCategory', 'name')
+      .populate('parentCategory', '_id name')
       .sort({ name: 1 });
   }
 
   async findInactiveCategories() {
     return await Category.find({ isActive: false })
-      .populate('parentCategory', 'name')
+      .populate('parentCategory', '_id name')
       .sort({ name: 1 });
   }
 
   async findAllIncludingInactive() {
     return await Category.find({})
-      .populate('parentCategory', 'name')
+      .populate('parentCategory', '_id name')
       .sort({ name: 1 });
   }
 
